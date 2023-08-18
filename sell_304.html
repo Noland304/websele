@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KPN BB GUN shop</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <header>
+        <h1><img src="รูป\bbv.png" style="width:100%"></h1>
+    </header>
+    <main>
+        
+        <div class="product">
+            <img src="/รูป/Kriss_Super-V.png">
+            <h2>Kriss Super-V</h2>
+            <p>Price: 10550฿.</p>
+            <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+            <span class="quantity">0</span>
+            <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+            <button class="confirm-btn" onclick="confirmOrder(this)">ตกลง</button>
+        </div>
+        <div class="product">
+            <img src="/รูป/Glock.png">
+            <h2>Glock</h2>
+            <p>Price: 8999฿.</p>
+            <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+            <span class="quantity">0</span>
+            <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+            <button class="confirm-btn" onclick="confirmOrder(this)">ตกลง</button>
+        </div>
+        <div class="product">
+            <img src="/รูป/M4A1.png">
+            <h2>M4A1</h2>
+            <p>Price: 22000฿.</p>
+            <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+            <span class="quantity">0</span>
+            <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+            <button class="confirm-btn" onclick="confirmOrder(this)">ตกลง</button>
+        </div>
+        <div class="product">
+            <img src="/รูป/MP5.png">
+            <h2>MP5</h2>
+            <p>Price: 25000฿.</p>
+            <button class="quantity-btn" onclick="changeQuantity(this, -1)">-</button>
+            <span class="quantity">0</span>
+            <button class="quantity-btn" onclick="changeQuantity(this, 1)">+</button>
+            <button class="confirm-btn" onclick="confirmOrder(this)">ตกลง</button>
+        </div>
+        
+
+        
+        <p>ราคารวม: <span id="total-price" >$0</span></p>
+    </div>
+    <div class="address-form">
+        <h2>กรอกที่อยู่</h2>
+        <form id="address-form">
+            <label for="name">ชื่อ-นามสกุล:</label>
+            <input type="text" id="name" name="name" required><br><br>
+    
+            <label for="address">ที่อยู่:</label>
+            <textarea id="address" name="address" required></textarea><br><br>
+    
+            <label for="city">เมื่อง:</label>
+            <input type="text" id="city" name="city" required><br><br>
+    
+            <label for="zipcode">รหัสไปรษณีย์:</label>
+            <input type="text" id="zipcode" name="zipcode" required><br><br>
+    
+            <button type="button" onclick="submitAddress()">ตกลง</button>
+        </form>
+    </div>
+    <br>
+    <div class="div3">
+    นโยบาย *สินค้าจะถึงภายใน 2-3 วันโดยประมาณ จัดส่งโดยบริษัทของทางร้านเอง*
+</div>  
+        <script>
+            function changeQuantity(button, change) {
+                var quantityElement = button.parentNode.querySelector(".quantity");
+                var currentQuantity = parseInt(quantityElement.textContent);
+                var newQuantity = currentQuantity + change;
+        
+                if (newQuantity >= 0) {
+                    quantityElement.textContent = newQuantity;
+                }
+            }
+            
+            function confirmOrder(button) {
+                var quantityElement = button.parentNode.querySelector(".quantity");
+                var currentQuantity = parseInt(quantityElement.textContent);
+                var productName = button.parentNode.querySelector("h2").textContent;
+                var price = getPriceFromProductNode(button.parentNode);
+                var total = currentQuantity * price;
+        
+                updateTotalPrice();
+                alert("คุณเลือกสินค้า: " + productName + "\nจำนวน: " + currentQuantity + "\nราคาทั้งหมด: $" + total);
+            }
+            
+            function getPriceFromProductNode(productNode) {
+                var priceText = productNode.querySelector("p").textContent;
+                var price = parseFloat(priceText.match(/\d+/));
+                return price;
+            }
+        
+            function updateTotalPrice() {
+                var products = document.querySelectorAll(".product");
+                var totalPrice = 0;
+                
+                products.forEach(function(product) {
+                    var quantity = parseInt(product.querySelector(".quantity").textContent);
+                    var price = getPriceFromProductNode(product);
+                    totalPrice += quantity * price;
+                });
+        
+                document.getElementById("total-price").textContent = "$" + totalPrice;
+            }
+            function submitAddress() {
+   
+    var name = document.getElementById("name").value;
+    var address = document.getElementById("address").value;
+    var city = document.getElementById("city").value;
+    var zipcode = document.getElementById("zipcode").value;
+    alert("Address submitted successfully!");
+}
+
+function updateTotalPrice() {
+    var products = document.querySelectorAll(".product");
+    var totalPrice = 0;
+
+    products.forEach(function(product) {
+        var quantity = parseInt(product.querySelector(".quantity").textContent);
+        var price = getPriceFromProductNode(product);
+        totalPrice += quantity * price;
+    });
+
+    
+    if (totalPrice > 1000) {
+        var discount = totalPrice * 0.1; // 10% discount
+        totalPrice -= discount;
+    }
+
+    document.getElementById("total-price").textContent = "$" + totalPrice.toFixed(2); 
+}
+        </script>
+    </main>        
+        <footer>
+            <div class="">
+                <div class="slide">
+                  <img src="/รูป/bbv.png" style="width:100%">
+                </div>
+        </footer>
+</body>
+</html>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:rgb(145, 145, 145);
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 2rem;
+}
+
+.product {
+    border: 1px solid #140202;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.add-to-cart {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.add-to-cart:hover {
+    background-color: #555;
+}
+.slide {
+    flex: 0 0 100%;
+    transition: transform 0.5s;
+}
+.div3{
+    color: rgb(255, 0, 0);
+}
+</style>
+
